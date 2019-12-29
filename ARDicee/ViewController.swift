@@ -19,26 +19,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the view's delegate
         sceneView.delegate = self
- 
- //MARK: - Create a Cube
-        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.red
-        cube.materials = [material]
-        
-//MARK: - Create a Sun
-        let sphere = SCNSphere(radius: 0.3)
-        let sphereMaterial = SCNMaterial()
-        sphereMaterial.diffuse.contents = UIImage(named: "art.scnassets/sun.jpg")
-        sphere.materials = [sphereMaterial]
-
-//MARK: - Creating a node and adding the shape to the node
-        let node = SCNNode()
-        node.position = SCNVector3(0, 0.1, -1)
-        node.geometry = sphere
-
-//MARK: - Displaying the node
-        sceneView.scene.rootNode.addChildNode(node)
+//
+// //MARK: - Create a Cube
+//        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+//        let material = SCNMaterial()
+//        material.diffuse.contents = UIColor.red
+//        cube.materials = [material]
+//
+////MARK: - Create a Sun
+//        let sphere = SCNSphere(radius: 0.3)
+//        let sphereMaterial = SCNMaterial()
+//        sphereMaterial.diffuse.contents = UIImage(named: "art.scnassets/sun.jpg")
+//        sphere.materials = [sphereMaterial]
+//
+////MARK: - Creating a node and adding the shape to the node
+//        let node = SCNNode()
+//        node.position = SCNVector3(0, 0.1, -1)
+//        node.geometry = sphere
+//
+////MARK: - Displaying the node
+//        sceneView.scene.rootNode.addChildNode(node)
         sceneView.autoenablesDefaultLighting = true
         
 
@@ -49,13 +49,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-//        // Create a new scene
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-//
-//        // Set the scene to the view
-//        sceneView.scene = scene
+        // Create a new scene
+        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+        
+        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+        diceNode.position = SCNVector3(0, 0, -0.1)
+        sceneView.scene.rootNode.addChildNode(diceNode)
+
+      }
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
